@@ -1068,6 +1068,40 @@ toolButtons.forEach((btn, index) => {
 });
 
 // =====================================================
+// MOBILE / PROFILE ELEMENTS
+// =====================================================
+
+const hamburgerBtn =
+    document.getElementById("hamburgerBtn");
+
+const hamburgerMenu =
+    document.getElementById("hamburgerMenu");
+
+const profileBtn =
+    document.getElementById("profileBtn");
+
+const profileDropdown =
+    document.getElementById("profileDropdown");
+
+const profileName =
+    document.getElementById("profileName");
+
+const profileDropdownName =
+    document.getElementById("profileDropdownName");
+
+const profileEmail =
+    document.getElementById("profileEmail");
+
+const profileAvatar =
+    document.getElementById("profileAvatar");
+
+const profileAvatarLarge =
+    document.getElementById("profileAvatarLarge");
+
+const logoutBtn =
+    document.getElementById("logoutBtn");
+
+// =====================================================
 // HAMBURGER MENU
 // =====================================================
 
@@ -1205,6 +1239,124 @@ document.addEventListener(
 
     }
 );
+
+
+
+
+// =====================================================
+// AUTHENTICATION + USER PROFILE
+// =====================================================
+
+function checkAuthentication() {
+
+    const userData =
+        localStorage.getItem("promptStudioUser");
+
+    // User is not logged in
+    if (!userData) {
+
+        const currentPage =
+            window.location.pathname;
+
+        window.location.replace(
+            `/login.html?redirect=${encodeURIComponent(currentPage)}`
+        );
+
+        return;
+    }
+
+    try {
+
+        const user =
+            JSON.parse(userData);
+
+        // -------------------------------
+        // USER NAME
+        // -------------------------------
+
+        const name =
+            user.name ||
+            user.displayName ||
+            "User";
+
+        // -------------------------------
+        // USER EMAIL
+        // -------------------------------
+
+        const email =
+            user.email ||
+            "user@email.com";
+
+        // -------------------------------
+        // AVATAR
+        // -------------------------------
+
+        const firstLetter =
+            name
+                .trim()
+                .charAt(0)
+                .toUpperCase() || "U";
+
+
+        // -------------------------------
+        // UPDATE PROFILE UI
+        // -------------------------------
+
+        if (profileName) {
+
+            profileName.textContent =
+                name;
+
+        }
+
+        if (profileDropdownName) {
+
+            profileDropdownName.textContent =
+                name;
+
+        }
+
+        if (profileEmail) {
+
+            profileEmail.textContent =
+                email;
+
+        }
+
+        if (profileAvatar) {
+
+            profileAvatar.textContent =
+                firstLetter;
+
+        }
+
+        if (profileAvatarLarge) {
+
+            profileAvatarLarge.textContent =
+                firstLetter;
+
+        }
+
+    }
+
+    catch (error) {
+
+        console.error(
+            "User data error:",
+            error
+        );
+
+        localStorage.removeItem(
+            "promptStudioUser"
+        );
+
+        window.location.replace(
+            "/login.html"
+        );
+
+    }
+
+}
 
 
 // =====================================================
