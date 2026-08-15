@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    
+    <title>Prompt Studio — AI Prompt Generator</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
+
+</head>
+
+<body>
+
+    <div class="mobile-nav">
+    
+        <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Open menu">
+            ☰
+        </button>
+    
+        <div class="hamburger-menu" id="hamburgerMenu">
+    
+            <a href="/workspace.html" class="workspace-btn protected-link" data-protected="true"
+                data-target="/workspace.html">
+                Workspace
+            </a>
+    
+            <div class="user-menu" id="userMenu">
+            
+                <button class="login-btn" id="mobileAuthBtn" type="button">
+                    Login / Sign Up
+                </button>
+            
+                <div class="profile-menu" id="profileMenu">
+            
+                    <button class="profile-btn" id="profileBtn" type="button">
+                        <span class="profile-avatar" id="profileAvatar">U</span>
+            
+                        <span id="profileName">User</span>
+            
+                        <span class="profile-arrow">⌄</span>
+                    </button>
+            
+                    <div class="profile-dropdown" id="profileDropdown">
+            
+                        <div class="profile-info">
+            
+                            <div class="profile-avatar large" id="profileAvatarLarge">
+                                U
+                            </div>
+            
+                            <div>
+                                <strong id="profileDropdownName">
+                                    User
+                                </strong>
+            
+                                <small id="profileEmail">
+                                    user@email.com
+                                </small>
+                            </div>
+            
+                        </div>
+            
+                        <div class="profile-divider"></div>
+            
+                        
+                        <a href="/workspace.html#history">
+                            History
+                        </a>
+            
+                        <button id="logoutBtn" type="button">
+                            Logout
+                        </button>
+            
+                    </div>
+            
+                </div>
+            
+            </div>
+             
+            
+        </div>
+
+        
+    
+    </div>
+    
+    <div class="wrap">
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div class="eyebrow">
+
+                <svg class="corner-icon" width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M0 0 L0 12 M0 0 L12 0" stroke="#7FCBE0" stroke-width="1.5" fill="none" />
+                </svg>
+
+                AI TOOLS
+
+            </div>
+
+            
+            <h1>Prompt Studio</h1>
+
+            <p class="sub">
+                Write your idea however it comes out — messy, half-formed, in any language.
+                Prompt Studio  turns it into a sharp, ready-to-use prompt.
+            </p>
+
+        </header>
+
+
+        <!-- INPUT PANEL -->
+
+        <div class="panel">
+
+            <svg class="corner tl" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+            <svg class="corner tr" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+            <svg class="corner bl" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+            <svg class="corner br" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+
+            <!-- INPUT -->
+
+            <div class="panel-label">
+                YOUR IDEA — ANY LANGUAGE, ANY FORM
+            </div>
+
+            <textarea id="ideaInput" rows="7"
+                placeholder="e.g. i want app that help people track water drink daily and remind... or apna soch kisi bhi tarah likho, hum sudhaar denge"></textarea>
+
+
+            <!-- WORD COUNT -->
+
+            <div class="word-count" id="wordCount">
+                0 words
+            </div>
+
+            <!-- ===============================
+                 AI TOOL NAVIGATION
+            ================================ -->
+            
+        <div class="tool-navigation">
+        
+            <a href="/image-prompt.html" class="tool-btn protected-link" data-protected="true" data-target="/image-prompt.html">
+                Image
+            </a>
+        
+            <a href="/video-prompt.html" class="tool-btn protected-link" data-protected="true" data-target="/video-prompt.html">
+                Video
+            </a>
+        
+            <a href="/voice-prompt.html" class="tool-btn protected-link" data-protected="true" data-target="/voice-prompt.html">
+                Voice
+            </a>
+        
+            <a href="/file-prompt.html" class="tool-btn protected-link" data-protected="true" data-target="/file-prompt.html">
+                File
+            </a>
+        
+            <span class="nav-indicator"></span>
+        
+        </div>
+
+            <!-- OUTPUT LANGUAGE -->
+
+            <div class="language-section">
+
+                <div class="panel-label">
+                    OUTPUT LANGUAGE
+                </div>
+
+                <div class="language-picker" id="languagePicker">
+
+                    <button type="button" class="language-selected" id="languageSelected">
+                        <span id="selectedLanguage">
+                            English
+                        </span>
+
+                        <span class="language-arrow">
+                            ⌄
+                        </span>
+                    </button>
+
+
+                    <!-- LANGUAGE SEARCH/DROPDOWN -->
+
+                    <div class="language-menu" id="languageMenu">
+
+                        <input type="text" id="languageSearch" placeholder="Search language..." autocomplete="off">
+
+                        <div id="languageList"></div>
+
+                    </div>
+
+                </div>
+
+
+                <!--
+                This hidden input stores the selected language.
+                script.js reads this value and sends it
+                to server.js.
+            -->
+
+                <input type="hidden" id="outputLanguage" value="English">
+
+                <div class="language-section">
+                
+                    <div class="panel-label">
+                        OUTPUT FORMAT
+                    </div>
+                
+                    <div class="language-picker" id="formatPicker">
+                
+                        <button type="button" class="language-selected" id="formatSelected">
+                            <span id="selectedFormat">
+                                Original Script
+                            </span>
+                
+                            <span class="language-arrow">
+                                ⌄
+                            </span>
+                        </button>
+                
+                        <div class="language-menu" id="formatMenu">
+                
+                            <div id="formatList"></div>
+                
+                        </div>
+                
+                    </div>
+                
+                    <input type="hidden" id="outputFormat" value="Original Script">
+                
+                </div>
+
+            
+
+
+            <!-- ACTION BUTTONS -->
+
+            <div class="actions">
+
+                <button id="generateBtn" disabled>
+                    Generate prompt →
+                </button>
+
+                <button id="clearBtn">
+                    Clear
+                </button>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div class="error-box" id="errorBox">
+                Couldn't generate a prompt right now. Try again.
+            </div>
+
+        </div>
+
+
+        <!-- OUTPUT PANEL -->
+
+        <div id="outputPanel">
+
+            <div class="panel accent">
+
+                <svg class="corner tl" viewBox="0 0 12 12">
+                    <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+                </svg>
+
+                <svg class="corner tr" viewBox="0 0 12 12">
+                    <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+                </svg>
+
+                <svg class="corner bl" viewBox="0 0 12 12">
+                    <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+                </svg>
+
+                <svg class="corner br" viewBox="0 0 12 12">
+                    <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+                </svg>
+
+
+                <div class="output-head">
+
+                    <div class="panel-label">
+                        GENERATED PROMPT
+                    </div>
+
+                    <button id="copyBtn">
+                        Copy prompt
+                    </button>
+
+                </div>
+
+
+                <p id="promptText"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script src="script.js"></script>
+    
+
+</body>
+
+</html>

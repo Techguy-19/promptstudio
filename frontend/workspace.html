@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Workspace | Prompt Studio</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" href="workspace.css">
+</head>
+
+<body>
+    
+    
+        <div class="mobile-workspace-nav">
+    
+            <button class="mobile-nav-item active" data-section="overview">
+                <span>⌂</span>
+                <span>Overview</span>
+            </button>
+    
+            <button class="mobile-nav-item" data-section="history">
+                <span>◷</span>
+                <span>History</span>
+            </button>
+    
+            <button class="mobile-nav-item" data-section="saved">
+                <span>☆</span>
+                <span>Saved</span>
+            </button>
+    
+            <button class="mobile-nav-item" data-section="tools">
+                <span>✦</span>
+                <span>AI Tools</span>
+            </button>
+    
+            <button class="mobile-nav-item" data-section="profile">
+                <span>◯</span>
+                <span>Profile</span>
+            </button>
+    
+        </div>
+    
+    
+       
+
+    <div class="workspace">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+
+        <aside class="sidebar">
+
+            <div class="brand">
+                <div class="brand-icon">✦</div>
+
+                <div>
+                    <h2>Prompt Studio</h2>
+                    <span>Workspace</span>
+                </div>
+            </div>
+
+
+            <nav class="sidebar-nav">
+
+                <button class="nav-item active" data-section="overview">
+                    <span>⌂</span>
+                    <span>Overview</span>
+                </button>
+
+                <button class="nav-item" data-section="history">
+                    <span>◷</span>
+                    <span>History</span>
+                </button>
+
+                <button class="nav-item" data-section="saved">
+                    <span>☆</span>
+                    <span>Saved</span>
+                </button>
+
+                <button class="nav-item" data-section="tools">
+                    <span>✦</span>
+                    <span>AI Tools</span>
+                </button>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <button class="nav-item" data-section="profile">
+                    <span>◯</span>
+                    <span>Profile</span>
+                </button>
+
+                <button class="nav-item logout-btn" id="logoutBtn">
+                    <span>↪</span>
+                    <span>Logout</span>
+                </button>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             MAIN
+        ========================== -->
+
+        <main class="main-content">
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+                    <p class="eyebrow">WORKSPACE</p>
+                    <h1 id="pageTitle">Overview</h1>
+                </div>
+
+                <div class="top-actions">
+
+                    <a href="/index.html" class="new-prompt-btn">
+                        + New Prompt
+                    </a>
+
+                    <div class="user-avatar" id="userAvatar">
+                        U
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 OVERVIEW
+            ========================== -->
+
+            <section class="workspace-section active" id="overview">
+
+                <div class="welcome-card">
+
+                    <div>
+                        <span class="small-label">WELCOME BACK</span>
+
+                        <h2>
+                            Hey, <span id="userName">there</span> 👋
+                        </h2>
+
+                        <p>
+                            Create, manage and organize all your AI prompts
+                            from one workspace.
+                        </p>
+                    </div>
+
+                    <a href="/index.html" class="primary-btn">
+                        Create Prompt →
+                    </a>
+
+                </div>
+
+
+                <!-- STATISTICS -->
+
+                <div class="stats-grid">
+
+                    <div class="stat-card">
+                        <span class="stat-icon">✦</span>
+
+                        <div>
+                            <span class="stat-label">
+                                Generated
+                            </span>
+
+                            <strong id="generatedCount">
+                                0
+                            </strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <span class="stat-icon">☆</span>
+
+                        <div>
+                            <span class="stat-label">
+                                Saved
+                            </span>
+
+                            <strong id="savedCount">
+                                0
+                            </strong>
+                        </div>
+                    </div>
+
+
+                    <div class="stat-card">
+                        <span class="stat-icon">◷</span>
+
+                        <div>
+                            <span class="stat-label">
+                                History
+                            </span>
+
+                            <strong id="historyCount">
+                                0
+                            </strong>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- RECENT -->
+
+                <div class="section-header">
+
+                    <div>
+                        <span class="small-label">
+                            RECENT ACTIVITY
+                        </span>
+
+                        <h2>Recent Prompts</h2>
+                    </div>
+
+                    <button class="text-btn" data-section-target="history">
+                        View all →
+                    </button>
+
+                </div>
+
+
+                <div class="prompt-list" id="recentPrompts">
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            ✦
+                        </div>
+
+                        <h3>No prompts yet</h3>
+
+                        <p>
+                            Your generated prompts will appear here.
+                        </p>
+
+                        <a href="/index.html" class="secondary-btn">
+                            Generate your first prompt
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 HISTORY
+            ========================== -->
+
+            <section class="workspace-section" id="history">
+
+                <div class="section-header large">
+
+                    <div>
+                        <span class="small-label">
+                            YOUR ACTIVITY
+                        </span>
+
+                        <h2>Prompt History</h2>
+                    </div>
+
+                    <button class="danger-btn" id="clearHistoryBtn">
+                        Clear History
+                    </button>
+
+                </div>
+
+
+                <div class="search-box">
+
+                    <span>⌕</span>
+
+                    <input type="text" id="historySearch" placeholder="Search your prompts...">
+
+                </div>
+
+
+                <div class="prompt-list" id="historyList">
+
+                    <div class="empty-state">
+                        <div class="empty-icon">◷</div>
+
+                        <h3>No history yet</h3>
+
+                        <p>
+                            Generated prompts will be stored here.
+                        </p>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =========================
+                 SAVED
+            ========================== -->
+
+            <section class="workspace-section" id="saved">
+
+                <div class="section-header large">
+
+                    <div>
+                        <span class="small-label">
+                            YOUR COLLECTION
+                        </span>
+
+                        <h2>Saved Prompts</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="prompt-list" id="savedList">
+
+                    <div class="empty-state">
+
+                        <div class="empty-icon">
+                            ☆
+                        </div>
+
+                        <h3>No saved prompts</h3>
+
+                        <p>
+                            Save your favorite prompts to find them quickly.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            
+        <!-- =========================
+             AI TOOLS
+        ========================== -->
+        
+        <section class="workspace-section" id="tools">
+        
+            <div class="section-header large">
+        
+                <div>
+                    <span class="small-label">
+                        CREATE WITH AI
+                    </span>
+        
+                    <h2>AI Tools</h2>
+        
+                    <p>
+                        Choose a tool and turn your ideas into powerful AI prompts.
+                    </p>
+                </div>
+        
+            </div>
+        
+        
+            <div class="tools-grid">
+            
+                <!-- TEXT → PROMPT -->
+            
+                <a href="/index.html" class="tool-card">
+            
+                    <div class="tool-icon">
+                        T
+                    </div>
+            
+                    <h3>Text → Prompt</h3>
+            
+                    <p>
+                        Turn your rough idea into a professional AI prompt.
+                    </p>
+            
+                    <span class="tool-link">
+                        Open tool →
+                    </span>
+            
+                </a>
+            
+            
+                <!-- IMAGE → PROMPT -->
+            
+                <a href="/image-prompt.html" class="tool-card">
+            
+                    <div class="tool-icon">
+                        ◉
+                    </div>
+            
+                    <h3>Image → Prompt</h3>
+            
+                    <p>
+                        Analyze an image and create a detailed AI prompt.
+                    </p>
+            
+                    <span class="tool-link">
+                        Open tool →
+                    </span>
+            
+                </a>
+            
+            
+                <!-- FILE → PROMPT -->
+            
+                <a href="/file-prompt.html" class="tool-card">
+            
+                    <div class="tool-icon">
+                        ▣
+                    </div>
+            
+                    <h3>File → Prompt</h3>
+            
+                    <p>
+                        Upload a document and turn its content into a useful AI prompt.
+                    </p>
+            
+                    <span class="tool-link">
+                        Open tool →
+                    </span>
+            
+                </a>
+            
+            
+                <!-- VOICE → PROMPT -->
+            
+                <a href="/voice-prompt.html" class="tool-card">
+            
+                    <div class="tool-icon">
+                        ♪
+                    </div>
+            
+                    <h3>Voice → Prompt</h3>
+            
+                    <p>
+                        Convert your spoken idea into a clear and structured AI prompt.
+                    </p>
+            
+                    <span class="tool-link">
+                        Open tool →
+                    </span>
+            
+                </a>
+            
+            
+                <!-- VIDEO → PROMPT -->
+            
+                <a href="/video-prompt.html" class="tool-card">
+            
+                    <div class="tool-icon">
+                        ▶
+                    </div>
+            
+                    <h3>Video → Prompt</h3>
+            
+                    <p>
+                        Analyze video content and create a detailed AI prompt.
+                    </p>
+            
+                    <span class="tool-link">
+                        Open tool →
+                    </span>
+            
+                </a>
+            
+            
+                <!-- MORE AI TOOLS -->
+            
+                <div class="tool-card coming-soon-card">
+            
+                    <div class="tool-icon">
+                        ✧
+                    </div>
+            
+                    <h3>More AI Tools</h3>
+            
+                    <p>
+                        New tools will be added to Prompt Studio.
+                    </p>
+            
+                    <span class="coming-soon">
+                        Coming soon
+                    </span>
+            
+                </div>
+            
+            </div>
+        
+        </section>
+
+            <!-- =========================
+                 PROFILE
+            ========================== -->
+
+            <section class="workspace-section" id="profile">
+
+                <div class="section-header large">
+
+                    <div>
+                        <span class="small-label">
+                            ACCOUNT
+                        </span>
+
+                        <h2>Your Profile</h2>
+                    </div>
+
+                </div>
+
+
+                <div class="profile-card">
+
+                    <div class="profile-avatar" id="profileAvatar">
+                        U
+                    </div>
+
+                    <div class="profile-info">
+
+                        <label>Name</label>
+                        <h3 id="profileName">User</h3>
+
+                        <label>Email</label>
+                        <p id="profileEmail">
+                            user@example.com
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+<!-- LOGOUT CONFIRMATION POPUP -->
+<div class="logout-modal" id="logoutModal">
+
+    <div class="logout-modal-overlay"></div>
+
+    <div class="logout-modal-box">
+
+        <div class="logout-modal-icon">
+            ↪
+        </div>
+
+        <h3>Are you sure?</h3>
+
+        <p>
+            Are you sure you want to logout?
+        </p>
+
+        <div class="logout-modal-actions">
+
+            <button type="button" class="logout-cancel-btn" id="logoutCancelBtn">
+                Cancel
+            </button>
+
+            <button type="button" class="logout-confirm-btn" id="logoutConfirmBtn">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <script src="workspace.js"></script>
+
+</body>
+
+</html>

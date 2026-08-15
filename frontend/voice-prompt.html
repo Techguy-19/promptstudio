@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Voice Prompt — AI Tools</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="voice-prompt.css">
+</head>
+
+<body>
+
+    <div class="mobile-nav">
+    
+        <button class="hamburger-btn" id="hamburgerBtn" type="button" aria-label="Open menu">
+            ☰
+        </button>
+    
+        <div class="hamburger-menu" id="hamburgerMenu">
+    
+            <a href="/workspace.html" class="workspace-btn protected-link" data-protected="true"
+                data-target="/workspace.html">
+                Workspace
+            </a>
+    
+            <div class="user-menu" id="userMenu">
+    
+    
+    
+                <div class="profile-menu" id="profileMenu">
+    
+                    <button class="profile-btn" id="profileBtn" type="button">
+                        <span class="profile-avatar" id="profileAvatar">U</span>
+    
+                        <span id="profileName">User</span>
+    
+                        <span class="profile-arrow">⌄</span>
+                    </button>
+    
+                    <div class="profile-dropdown" id="profileDropdown">
+    
+                        <div class="profile-info">
+    
+                            <div class="profile-avatar large" id="profileAvatarLarge">
+                                U
+                            </div>
+    
+                            <div>
+                                <strong id="profileDropdownName">
+                                    User
+                                </strong>
+    
+                                <small id="profileEmail">
+                                    user@email.com
+                                </small>
+                            </div>
+    
+                        </div>
+    
+                        <div class="profile-divider"></div>
+    
+    
+                        <a href="/workspace.html#history">
+                            History
+                        </a>
+    
+                        <button id="logoutBtn" type="button">
+                            Logout
+                        </button>
+    
+                    </div>
+    
+                </div>
+    
+            </div>
+    
+    
+        </div>
+    
+    
+    
+    </div>
+
+    <div class="wrap">
+
+        <!-- HEADER -->
+
+        <header>
+
+            <div class="eyebrow">
+
+                <svg class="corner-icon" width="12" height="12" viewBox="0 0 12 12">
+                    <path d="M0 0 L0 12 M0 0 L12 0" stroke="#a78bfa" stroke-width="1.5" fill="none" />
+                </svg>
+
+                AI TOOLS
+
+            </div>
+
+            <h1>Voice - Prompt Studio</h1>
+
+            <p class="sub">
+                Upload a reference voice and describe what you want.
+                Voice Prompt turns your idea into a detailed,
+                ready-to-use voice generation prompt.
+            </p>
+
+        </header>
+
+
+        <!-- MAIN INPUT PANEL -->
+
+        <div class="panel">
+
+            <!-- CORNERS -->
+
+            <svg class="corner tl" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+            <svg class="corner tr" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+            <svg class="corner bl" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+            <svg class="corner br" viewBox="0 0 12 12">
+                <path d="M0 0 L0 12 M0 0 L12 0" stroke-width="1.5" fill="none" />
+            </svg>
+
+
+            <!-- VOICE REFERENCE -->
+
+            <div class="panel-label">
+                REFERENCE VOICE — OPTIONAL
+            </div>
+
+            <div class="upload-area" id="uploadArea">
+
+                <input type="file" id="voiceInput" accept="audio/*" hidden>
+
+                <!-- UPLOAD CONTENT -->
+
+                <div id="uploadContent">
+
+                    <div class="upload-icon">
+                        🎙
+                    </div>
+
+                    <div class="upload-title">
+                        Upload reference voice
+                    </div>
+
+                    <div class="upload-sub">
+                        MP3, WAV, M4A, OGG and other audio formats
+                    </div>
+
+                    <button type="button" id="uploadBtn" class="upload-btn">
+                        Choose audio
+                    </button>
+
+                </div>
+
+
+                <!-- AUDIO PREVIEW -->
+
+                <div class="audio-preview" id="audioPreview">
+
+                    <div class="audio-icon">
+                        ♪
+                    </div>
+
+                    <audio id="previewAudio" controls></audio>
+
+                    <div class="audio-info">
+
+                        <span id="voiceName">
+                            voice.mp3
+                        </span>
+
+                        <button type="button" id="removeVoice">
+                            Remove
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="description-section">
+
+                <div class="panel-label">
+                    DESCRIBE YOUR VOICE
+                </div>
+
+                <textarea id="ideaInput" rows="7"
+                    placeholder="Describe the voice you want to create... e.g. warm male voice, calm and confident tone, medium pitch, natural speaking style, slightly energetic..."></textarea>
+
+                <div class="word-count" id="wordCount">
+                    0 words
+                </div>
+
+            </div>
+            <!-- ===============================
+                             AI TOOL NAVIGATION
+                        ================================ -->
+            
+            <div class="tool-navigation">
+            
+                <a href="/index.html" class="tool-btn">
+                    Text
+                </a>
+            
+                <a href="/image-prompt.html" class="tool-btn">
+                    Image
+                </a>
+            
+                <a href="/video-prompt.html" class="tool-btn">
+                    Video
+                </a>
+            
+                <a href="/file-prompt.html" class="tool-btn">
+                    File
+                </a>
+            
+                <span class="nav-indicator"></span>
+            
+            </div>
+
+            <!-- OUTPUT LANGUAGE -->
+
+            <div class="language-section">
+
+                <div class="panel-label">
+                    OUTPUT LANGUAGE
+                </div>
+
+                <div class="language-picker" id="languagePicker">
+
+                    <button type="button" class="language-selected" id="languageSelected">
+
+                        <span id="selectedLanguage">
+                            English
+                        </span>
+
+                        <span class="language-arrow">
+                            ⌄
+                        </span>
+
+                    </button>
+
+
+                    <div class="language-menu" id="languageMenu">
+
+                        <input type="text" id="languageSearch" placeholder="Search language..." autocomplete="off">
+
+                        <div id="languageList"></div>
+
+                    </div>
+
+                </div>
+
+                <input type="hidden" id="outputLanguage" value="English">
+
+            </div>
+
+
+            <!-- OUTPUT FORMAT -->
+
+            <div class="language-section">
+
+                <div class="panel-label">
+                    OUTPUT FORMAT
+                </div>
+
+                <div class="language-picker" id="formatPicker">
+
+                    <button type="button" class="language-selected" id="formatSelected">
+
+                        <span id="selectedFormat">
+                            Original Prompt
+                        </span>
+
+                        <span class="language-arrow">
+                            ⌄
+                        </span>
+
+                    </button>
+
+
+                    <div class="language-menu" id="formatMenu">
+
+                        <div id="formatList"></div>
+
+                    </div>
+
+                </div>
+
+                <input type="hidden" id="outputFormat" value="Original Prompt">
+
+            </div>
+
+
+            <!-- ACTIONS -->
+
+            <div class="actions">
+
+                <button id="generateBtn" disabled>
+                    Generate prompt →
+                </button>
+
+                <button id="clearBtn">
+                    Clear
+                </button>
+
+            </div>
+
+
+            <!-- ERROR -->
+
+            <div class="error-box" id="errorBox">
+                Couldn't generate a prompt right now. Try again.
+            </div>
+
+        </div>
+
+
+        <!-- OUTPUT -->
+
+        <div id="outputPanel">
+
+            <div class="panel accent">
+
+                <div class="output-head">
+
+                    <div class="panel-label">
+                        GENERATED VOICE PROMPT
+                    </div>
+
+                    <button id="copyBtn">
+                        Copy prompt
+                    </button>
+
+                </div>
+
+                <p id="promptText"></p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script src="voice-prompt.js"></script>
+
+</body>
+
+</html>

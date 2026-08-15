@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login | Prompt Studio</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <section class="wrapper">
+
+        <!-- =========================
+             SIGNUP
+        ========================== -->
+
+        <div class="form signup">
+
+            <header>Sign Up</header>
+
+            <form id="signupForm">
+
+                <input type="text" id="signupName" placeholder="Full name" required>
+
+                <input type="email" id="signupEmail" placeholder="Email address" required>
+
+<div class="password-box">
+    <input type="password" id="signupPassword" placeholder="Password" required>
+    <span class="toggle-password" onclick="togglePassword('signupPassword', this)">🔒</span>
+</div>
+                <div class="checkbox">
+
+                    <input type="checkbox" id="signupCheck" required>
+
+                    <label for="signupCheck">
+                        I accept all terms & conditions
+                    </label>
+
+                </div>
+
+                <input type="submit" value="Create Account">
+                 
+                <div class="google-login">
+                    <button type="button" id="googleLoginBtn">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                        Continue with Google
+                    </button>
+                </div>
+            </form>
+
+            <!-- SWITCH TO LOGIN -->
+
+            <div class="auth-switch">
+
+                Already have an account?
+
+                <a href="#" id="showLogin">
+                    Login
+                </a>
+
+            </div>
+
+        </div>
+
+
+        <!-- =========================
+             LOGIN
+        ========================== -->
+
+        <div class="form login">
+
+            <header>Login</header>
+
+            <form id="loginForm">
+
+                <input type="email" id="loginEmail" placeholder="Email address" required>
+
+<div class="password-box">
+    <input type="password" id="loginPassword" placeholder="Password" required>
+    <span class="toggle-password" onclick="togglePassword('loginPassword', this)">🔒</span>
+</div>
+                <a href="#" id="forgotPassword">
+                    Forgot password?
+                </a>
+
+                <input type="submit" value="Login">
+
+                <div class="google-login">
+                    <button type="button" id="googleLoginBtnLogin">
+                        <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google">
+                        Continue with Google
+                    </button>
+                </div>
+
+            </form>
+
+            <!-- SWITCH TO SIGNUP -->
+
+            <div class="auth-switch">
+
+                Don't have an account?
+
+                <a href="#" id="showSignup">
+                    Sign Up
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+<!-- =========================
+     CUSTOM AUTH MODAL
+========================== -->
+
+<div class="auth-modal" id="authModal">
+
+    <div class="auth-modal-overlay"></div>
+
+    <div class="auth-modal-box">
+
+        <div class="auth-modal-icon" id="authModalIcon">
+            !
+        </div>
+
+        <h2 id="authModalTitle">
+            Message
+        </h2>
+
+        <p id="authModalMessage">
+            Something happened.
+        </p>
+
+        <button type="button" id="authModalButton">
+            OK
+        </button>
+
+    </div>
+
+</div>
+
+<script type="module">
+
+    // =====================================================
+    // FIREBASE
+    // =====================================================
+
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-app.js";
+
+    import {
+        getAuth,
+        GoogleAuthProvider,
+        signInWithPopup
+    } from "https://www.gstatic.com/firebasejs/12.1.0/firebase-auth.js";
+
+
+    // =====================================================
+    // FIREBASE CONFIG
+    // =====================================================
+
+    const firebaseConfig = {
+
+        apiKey:
+            "AIzaSyDl9NSyEBzu74FuY2lURBa4uy760EmbihI",
+
+        authDomain:
+            "prompt-studio-d42b9.firebaseapp.com",
+
+        projectId:
+            "prompt-studio-d42b9",
+
+        storageBucket:
+            "prompt-studio-d42b9.firebasestorage.app",
+
+        messagingSenderId:
+            "769697858137",
+
+        appId:
+            "1:769697858137:web:01d6f24de2d7b047b96748",
+
+        measurementId:
+            "G-DWP2D9GVKM"
+
+    };
+
+
+    // =====================================================
+    // INITIALIZE FIREBASE
+    // =====================================================
+
+    const firebaseApp =
+        initializeApp(firebaseConfig);
+
+    const auth =
+        getAuth(firebaseApp);
+
+    const googleProvider =
+        new GoogleAuthProvider();
+
+    console.log(
+        "Firebase Authentication ready."
+    );
+
+
+    // =====================================================
+    // REDIRECT LOGIC
+    // =====================================================
+
+    function getRedirectUrl() {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const redirect =
+            params.get("redirect");
+
+        // Only allow internal paths
+
+        if (
+            redirect &&
+            redirect.startsWith("/") &&
+            !redirect.startsWith("//")
+        ) {
+
+            return redirect;
+
+        }
+
+        return "/index.html";
+
+    }
+
+
+    // =====================================================
+    // GOOGLE BUTTONS
+    // =====================================================
+
+    const googleSignupButton =
+        document.getElementById(
+            "googleLoginBtn"
+        );
+
+    const googleLoginButton =
+        document.getElementById(
+            "googleLoginBtnLogin"
+        );
+
+
+    // =====================================================
+    // GOOGLE AUTHENTICATION
+    // =====================================================
+
+    async function handleGoogleAuth(
+        button,
+        mode
+    ) {
+
+        try {
+
+            // -------------------------------------------------
+            // DISABLE BUTTON
+            // -------------------------------------------------
+
+            button.disabled = true;
+
+            button.textContent =
+                "Signing in...";
+
+
+            // -------------------------------------------------
+            // GOOGLE POPUP
+            // -------------------------------------------------
+
+            const result =
+                await signInWithPopup(
+                    auth,
+                    googleProvider
+                );
+
+
+            const user =
+                result.user;
+
+
+            console.log(
+                "Google user:",
+                user
+            );
+
+
+            // -------------------------------------------------
+            // GET FIREBASE ID TOKEN
+            // -------------------------------------------------
+
+            const idToken =
+                await user.getIdToken();
+
+
+            // -------------------------------------------------
+            // SEND TOKEN + MODE TO SERVER
+            // -------------------------------------------------
+
+            const response =
+                await fetch(
+                    "/api/google-login",
+                    {
+
+                        method: "POST",
+
+                        headers: {
+
+                            "Content-Type":
+                                "application/json"
+
+                        },
+
+                        credentials:
+                            "include",
+
+                        body:
+                            JSON.stringify({
+
+                                idToken:
+                                    idToken,
+
+                                mode:
+                                    mode
+
+                            })
+
+                    }
+                );
+
+
+            // -------------------------------------------------
+            // READ SERVER RESPONSE
+            // -------------------------------------------------
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "Google authentication response:",
+                data
+            );
+
+
+            // -------------------------------------------------
+            // SERVER ERROR
+            // -------------------------------------------------
+
+            if (!response.ok) {
+
+                showAuthModal(
+
+                    mode === "signup"
+                        ? "Google Signup Failed"
+                        : "Google Login Failed",
+
+                    data.error ||
+                    "Unable to authenticate with Google.",
+
+                    "error"
+
+                );
+
+                button.disabled = false;
+
+                button.textContent =
+                    "Continue with Google";
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // SAVE USER FOR UI
+            // -------------------------------------------------
+
+            if (data.user) {
+
+                localStorage.setItem(
+
+                    "promptStudioUser",
+
+                    JSON.stringify(
+                        data.user
+                    )
+
+                );
+
+            }
+
+
+            // -------------------------------------------------
+            // SUCCESS
+            // -------------------------------------------------
+
+            if (mode === "signup") {
+
+                showAuthModal(
+
+                    "Account created",
+
+                    "Your Google account has been created successfully.",
+
+                    "success"
+
+                );
+
+            } else {
+
+                // Login doesn't need to show a modal.
+                // Redirect immediately.
+
+                window.location.replace(
+                    getRedirectUrl()
+                );
+
+                return;
+
+            }
+
+
+            // -------------------------------------------------
+            // SIGNUP SUCCESS REDIRECT
+            // -------------------------------------------------
+
+            if (authModalButton) {
+
+                authModalButton.onclick =
+                    function () {
+
+                        closeAuthModal();
+
+                        window.location.replace(
+                            getRedirectUrl()
+                        );
+
+                    };
+
+            }
+
+
+        }
+
+        catch (error) {
+
+            console.error(
+                "Google Authentication Error:",
+                error
+            );
+
+
+            // -------------------------------------------------
+            // FIREBASE / GOOGLE ERROR
+            // -------------------------------------------------
+
+            let message =
+                error.message ||
+                "Unable to authenticate with Google.";
+
+
+            // Better message for popup problems
+
+            if (
+                error.code ===
+                "auth/popup-closed-by-user"
+            ) {
+
+                message =
+                    "Google sign-in was cancelled.";
+
+            }
+
+
+            else if (
+                error.code ===
+                "auth/popup-blocked"
+            ) {
+
+                message =
+                    "The Google sign-in popup was blocked by your browser.";
+
+            }
+
+
+            else if (
+                error.code ===
+                "auth/unauthorized-domain"
+            ) {
+
+                message =
+                    "This website domain is not authorized in Firebase Authentication.";
+
+            }
+
+
+            showAuthModal(
+
+                mode === "signup"
+                    ? "Google Signup Failed"
+                    : "Google Login Failed",
+
+                message,
+
+                "error"
+
+            );
+
+
+            button.disabled = false;
+
+            button.textContent =
+                "Continue with Google";
+
+        }
+
+    }
+
+
+    // =====================================================
+    // SIGNUP GOOGLE BUTTON
+    // =====================================================
+
+    if (googleSignupButton) {
+
+        googleSignupButton.addEventListener(
+            "click",
+            function () {
+
+                handleGoogleAuth(
+                    googleSignupButton,
+                    "signup"
+                );
+
+            }
+        );
+
+    }
+
+
+    // =====================================================
+    // LOGIN GOOGLE BUTTON
+    // =====================================================
+
+    if (googleLoginButton) {
+
+        googleLoginButton.addEventListener(
+            "click",
+            function () {
+
+                handleGoogleAuth(
+                    googleLoginButton,
+                    "login"
+                );
+
+            }
+        );
+
+    }
+
+</script>
+
+<script>
+
+    const wrapper = document.querySelector(".wrapper");
+    // =====================================================
+        // CUSTOM AUTH MODAL
+        // =====================================================
+
+        const authModal =
+            document.getElementById("authModal");
+
+        const authModalTitle =
+            document.getElementById("authModalTitle");
+
+        const authModalMessage =
+            document.getElementById("authModalMessage");
+
+        const authModalButton =
+            document.getElementById("authModalButton");
+
+        const authModalIcon =
+            document.getElementById("authModalIcon");
+
+
+        function showAuthModal(
+            title,
+            message,
+            type = "info"
+        ) {
+
+            if (!authModal) {
+                return;
+            }
+
+
+            if (authModalTitle) {
+
+                authModalTitle.textContent =
+                    title;
+
+            }
+
+
+            if (authModalMessage) {
+
+                authModalMessage.textContent =
+                    message;
+
+            }
+
+
+            if (authModalIcon) {
+
+                if (type === "success") {
+
+                    authModalIcon.textContent = "✓";
+
+                } else if (type === "error") {
+
+                    authModalIcon.textContent = "×";
+
+                } else {
+
+                    authModalIcon.textContent = "!";
+
+                }
+
+            }
+
+
+            authModal.classList.add("show");
+
+        }
+
+
+        function closeAuthModal() {
+
+            if (!authModal) {
+                return;
+            }
+
+            authModal.classList.remove("show");
+
+        }
+
+
+        if (authModalButton) {
+
+            authModalButton.addEventListener(
+                "click",
+                closeAuthModal
+            );
+
+        }
+
+
+        if (authModal) {
+
+            const overlay =
+                authModal.querySelector(
+                    ".auth-modal-overlay"
+                );
+
+            if (overlay) {
+
+                overlay.addEventListener(
+                    "click",
+                    closeAuthModal
+                );
+
+            }
+
+        }
+
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape" &&
+                    authModal &&
+                    authModal.classList.contains("show")
+                ) {
+
+                    closeAuthModal();
+
+                }
+
+            }
+        );
+
+    const signupHeader = document.querySelector(".signup header");
+    const loginHeader = document.querySelector(".login header");
+
+    // =====================================================
+    // REDIRECT DESTINATION
+    // =====================================================
+
+    function getRedirectUrl() {
+
+        const params = new URLSearchParams(window.location.search);
+
+        const redirect = params.get("redirect");
+
+        // Security: only allow internal paths
+        if (
+            redirect &&
+            redirect.startsWith("/") &&
+            !redirect.startsWith("//")
+        ) {
+            return redirect;
+        }
+
+        // Default destination
+       return "/index.html";
+    }
+
+
+    // =====================================================
+    // SWITCH SIGNUP / LOGIN
+    // =====================================================
+
+    loginHeader.addEventListener("click", () => {
+        wrapper.classList.add("active");
+    });
+
+
+    signupHeader.addEventListener("click", () => {
+        wrapper.classList.remove("active");
+    });
+
+
+    document
+        .getElementById("showSignup")
+        .addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            wrapper.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById("showLogin")
+        .addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            wrapper.classList.add("active");
+
+        });
+
+
+    // =====================================================
+    // SIGNUP
+    // =====================================================
+
+    document
+        .getElementById("signupForm")
+        .addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+            const name =
+                document
+                    .getElementById("signupName")
+                    .value
+                    .trim();
+
+            const email =
+                document
+                    .getElementById("signupEmail")
+                    .value
+                    .trim();
+
+            const password =
+                document
+                    .getElementById("signupPassword")
+                    .value;
+
+
+            try {
+
+                const response =
+                    await fetch("/api/signup", {
+
+                        method: "POST",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            name,
+                            email,
+                            password
+                        })
+
+                    });
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                   showAuthModal(
+                        "Signup failed",
+                        data.error || "Signup failed.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                // Save user only for UI convenience.
+                // Real authentication is handled by session.
+                if (data.user) {
+
+                    localStorage.setItem(
+                        "promptStudioUser",
+                        JSON.stringify(data.user)
+                    );
+
+                }
+
+
+               showAuthModal(
+                    "Account created",
+                    "Your account has been created successfully!",
+                    "success"
+                );
+
+                document
+                    .getElementById("signupForm")
+                    .reset();
+
+                if (authModalButton) {
+
+                    authModalButton.onclick = function () {
+
+                        closeAuthModal();
+
+                        window.location.replace(
+                            getRedirectUrl()
+                        );
+
+                    };
+
+                }
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Signup error:",
+                    error
+                );
+
+               showAuthModal(
+                    "Connection error",
+                    "Unable to connect to the server.",
+                    "error"
+                );
+
+            }
+
+        });
+
+
+    // =====================================================
+    // LOGIN
+    // =====================================================
+
+    document
+        .getElementById("loginForm")
+        .addEventListener("submit", async function (event) {
+
+            event.preventDefault();
+
+
+            const email =
+                document
+                    .getElementById("loginEmail")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("loginPassword")
+                    .value;
+
+
+            try {
+
+                const response =
+                    await fetch("/api/login", {
+
+                        method: "POST",
+
+                        credentials: "include",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+                            email,
+                            password
+                        })
+
+                    });
+
+
+                const data =
+                    await response.json();
+
+
+                if (!response.ok) {
+
+                   showAuthModal(
+                        "Login failed",
+                        data.error || "Login failed.",
+                        "error"
+                    );
+                    return;
+                }
+
+
+                // Save user for UI only.
+                if (data.user) {
+
+                    localStorage.setItem(
+                        "promptStudioUser",
+                        JSON.stringify(data.user)
+                    );
+
+                }
+
+
+                // =================================================
+                // IMPORTANT
+                // Do NOT always go to index.html.
+                // Go back to the page user originally requested.
+                // =================================================
+
+                window.location.replace(
+                    getRedirectUrl()
+                );
+
+            }
+
+            catch (error) {
+
+                console.error(
+                    "Login error:",
+                    error
+                );
+
+                showAuthModal(
+                    "Connection error",
+                    "Unable to connect to the server.",
+                    "error"
+                );
+
+            }
+
+        });
+
+
+    // =====================================================
+    // FORGOT PASSWORD
+    // =====================================================
+
+    document
+        .getElementById("forgotPassword")
+        .addEventListener("click", function (event) {
+
+            event.preventDefault();
+
+            showAuthModal(
+                "Password recovery",
+                "Password recovery will be added next.",
+                "info"
+            );
+
+        });
+
+
+    // =====================================================
+    // SHOW / HIDE PASSWORD
+    // =====================================================
+
+    function togglePassword(inputId, icon) {
+
+        const input =
+            document.getElementById(inputId);
+
+
+        if (input.type === "password") {
+
+            input.type = "text";
+
+            icon.textContent = "🔓";
+
+        }
+
+        else {
+
+            input.type = "password";
+
+            icon.textContent = "🔒";
+
+        }
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

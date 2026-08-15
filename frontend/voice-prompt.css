@@ -1,0 +1,1737 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+
+:root {
+    --bg: #080b14;
+    --card: rgba(18, 23, 38, 0.78);
+    --border: rgba(47, 28, 68, 0.863);
+    --text: #ffffff;
+    --muted: #9299aa;
+    --muted-light: #b4bac8;
+    --primary: #8b5cf6;
+    --primary-light: #a78bfa;
+    --primary-dark: #6d28d9;
+    --success: #34d399;
+    --danger: #fb7185;
+
+    --shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35);
+
+    --radius: 16px;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(circle at 50% -10%,
+            rgba(124, 58, 237, 0.18),
+            transparent 38%),
+        radial-gradient(circle at 90% 20%,
+            rgba(56, 189, 248, 0.08),
+            transparent 30%),
+        var(--bg);
+
+    color: var(--text);
+
+    font-family:
+        'DM Sans',
+        sans-serif;
+
+    padding:
+        55px 20px 80px;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+.wrap {
+    width: 100%;
+    max-width: 720px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    margin-bottom: 32px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 11px;
+    letter-spacing: 0.16em;
+
+    color: var(--primary-light);
+
+    margin-bottom: 14px;
+}
+
+h1 {
+    margin: 0;
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size:
+        clamp(34px, 6vw, 46px);
+
+    line-height: 1.05;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+
+    background:
+        linear-gradient(110deg,
+            #ffffff 20%,
+            #c4b5fd 55%,
+            #7dd3fc 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.sub {
+    margin: 14px 0 0;
+
+    max-width: 570px;
+
+    color: var(--muted);
+
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   PANEL
+========================================================= */
+
+.panel {
+    position: relative;
+
+    background:
+        linear-gradient(145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.015));
+
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+
+    padding: 26px;
+
+    box-shadow: var(--shadow);
+
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.panel.accent {
+    border-color:
+        rgba(139, 92, 246, 0.38);
+
+    background:
+        linear-gradient(145deg,
+            rgba(139, 92, 246, 0.075),
+            rgba(255, 255, 255, 0.02));
+}
+
+.corner {
+    display: none;
+}
+
+.panel-label {
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 10px;
+    letter-spacing: 0.13em;
+
+    color: var(--muted-light);
+
+    margin-bottom: 10px;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   AUDIO UPLOAD
+========================================================= */
+
+.upload-area {
+    width: 100%;
+    min-height: 230px;
+
+    border:
+        1px dashed rgba(139, 92, 246, 0.4);
+
+    border-radius: 12px;
+
+    background:
+        rgba(5, 8, 16, 0.45);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 22px;
+
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease;
+}
+
+.upload-area:hover {
+    border-color:
+        rgba(139, 92, 246, 0.75);
+
+    background:
+        rgba(139, 92, 246, 0.045);
+}
+
+.upload-icon {
+    width: 52px;
+    height: 52px;
+
+    margin:
+        0 auto 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 14px;
+
+    background:
+        rgba(139, 92, 246, 0.14);
+
+    color: var(--primary-light);
+
+    font-size: 22px;
+}
+
+.upload-title {
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size: 16px;
+    font-weight: 600;
+
+    margin-bottom: 6px;
+}
+
+.upload-sub {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    margin-bottom: 15px;
+}
+
+.upload-btn {
+    background:
+        rgba(139, 92, 246, 0.12);
+
+    border:
+        1px solid rgba(139, 92, 246, 0.35);
+
+    color: var(--primary-light);
+
+    border-radius: 9px;
+
+    padding:
+        10px 15px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+.upload-btn:hover {
+    background:
+        rgba(139, 92, 246, 0.2);
+}
+
+
+/* =========================================================
+   AUDIO PREVIEW
+========================================================= */
+
+.audio-preview {
+    display: none;
+
+    width: 100%;
+
+    text-align: left;
+}
+
+.audio-icon {
+    width: 55px;
+    height: 55px;
+
+    margin:
+        0 auto 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        rgba(139, 92, 246, 0.15);
+
+    color: var(--primary-light);
+
+    font-size: 25px;
+}
+
+.audio-preview audio {
+    display: block;
+
+    width: 100%;
+    height: 42px;
+
+    margin-bottom: 12px;
+}
+
+.audio-info {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 10px;
+}
+
+#voiceName {
+    color: var(--muted-light);
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 11px;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#removeVoice {
+    background:
+        rgba(244, 63, 94, 0.08);
+
+    border:
+        1px solid rgba(244, 63, 94, 0.25);
+
+    color: #fda4af;
+
+    border-radius: 8px;
+
+    padding:
+        7px 10px;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+#removeVoice:hover {
+    background:
+        rgba(244, 63, 94, 0.14);
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.description-section {
+    margin-top: 24px;
+}
+
+textarea {
+    display: block;
+
+    width: 100%;
+    min-height: 175px;
+
+    background:
+        rgba(5, 8, 16, 0.55);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    color: var(--text);
+
+    font-family:
+        'DM Sans',
+        sans-serif;
+
+    font-size: 15px;
+    line-height: 1.7;
+
+    padding: 17px;
+
+    resize: vertical;
+
+    outline: none;
+}
+
+textarea:focus {
+    border-color:
+        rgba(139, 92, 246, 0.7);
+
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.10);
+}
+
+textarea::placeholder {
+    color: #626a7c;
+}
+
+.word-count {
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 11px;
+
+    color: #697184;
+
+    margin-top: 9px;
+}
+
+
+/* =========================================================
+   LANGUAGE / FORMAT
+========================================================= */
+
+.language-section {
+    margin-top: 23px;
+}
+
+.language-picker {
+    position: relative;
+
+    width: 100%;
+}
+
+.language-selected {
+    width: 100%;
+
+    background:
+        rgba(255, 255, 255, 0.035);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    color: var(--text);
+
+    padding:
+        12px 14px;
+
+    font-family:
+        'DM Sans',
+        sans-serif;
+
+    font-size: 14px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    text-align: left;
+}
+
+.language-selected:hover {
+    border-color:
+        rgba(139, 92, 246, 0.45);
+}
+
+.language-arrow {
+    color: var(--primary-light);
+
+    font-size: 17px;
+}
+
+.language-menu {
+    display: none;
+
+    position: absolute;
+
+    top:
+        calc(100% + 8px);
+
+    left: 0;
+
+    width: 100%;
+
+    background:
+        rgba(15, 19, 32, 0.97);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.1);
+
+    border-radius: 12px;
+
+    padding: 8px;
+
+    z-index: 100;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.5);
+
+    backdrop-filter: blur(20px);
+}
+
+.language-menu.open {
+    display: block;
+}
+
+#languageSearch {
+    width: 100%;
+
+    background:
+        rgba(255, 255, 255, 0.045);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 8px;
+
+    color: var(--text);
+
+    padding:
+        10px 11px;
+
+    outline: none;
+}
+
+#languageList {
+    margin-top: 6px;
+
+    max-height: 220px;
+
+    overflow-y: auto;
+}
+
+.language-option {
+    padding:
+        10px 11px;
+
+    border-radius: 7px;
+
+    color: var(--muted-light);
+
+    font-size: 13px;
+
+    cursor: pointer;
+}
+
+.language-option:hover {
+    background:
+        rgba(139, 92, 246, 0.12);
+
+    color: #fff;
+}
+
+.language-empty {
+    padding: 10px;
+
+    color: var(--muted);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.actions {
+    margin-top: 22px;
+
+    display: flex;
+
+    gap: 10px;
+
+    align-items: center;
+}
+
+#generateBtn {
+    flex: 1;
+
+    background:
+        linear-gradient(135deg,
+            #8b5cf6,
+            #6d28d9);
+
+    color: white;
+
+    border: none;
+
+    border-radius: 10px;
+
+    padding:
+        14px 20px;
+
+    font-family:
+        'Space Grotesk',
+        sans-serif;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+#generateBtn:disabled {
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    color: #626a7c;
+
+    cursor: not-allowed;
+}
+
+#clearBtn {
+    display: none;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border:
+        1px solid var(--border);
+
+    color: var(--muted-light);
+
+    border-radius: 10px;
+
+    padding:
+        14px 17px;
+
+    font-size: 13.5px;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.2s ease,
+        color 0.2s ease,
+        background 0.2s ease;
+}
+
+#clearBtn:hover {
+    border-color:
+        rgba(255, 255, 255, 0.18);
+
+    color: white;
+
+    background:
+        rgba(255, 255, 255, 0.05);
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.error-box {
+    display: none;
+
+    margin-top: 14px;
+
+    font-size: 13px;
+
+    color: #fda4af;
+
+    background:
+        rgba(244, 63, 94, 0.08);
+
+    border:
+        1px solid rgba(244, 63, 94, 0.22);
+
+    border-radius: 9px;
+
+    padding:
+        11px 13px;
+}
+
+
+/* =========================================================
+   OUTPUT
+========================================================= */
+
+#outputPanel {
+    display: none;
+
+    margin-top: 22px;
+}
+
+.output-head {
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 14px;
+}
+
+#copyBtn {
+    background:
+        rgba(139, 92, 246, 0.09);
+
+    border:
+        1px solid rgba(139, 92, 246, 0.3);
+
+    color: var(--primary-light);
+
+    border-radius: 8px;
+
+    padding:
+        8px 13px;
+
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+#promptText {
+    font-family:
+        'IBM Plex Mono',
+        monospace;
+
+    font-size: 13.5px;
+
+    line-height: 1.8;
+
+    color: #dce0e8;
+
+    margin: 0;
+
+    white-space: pre-wrap;
+
+    word-break: break-word;
+
+    background:
+        rgba(4, 7, 13, 0.58);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 11px;
+
+    padding: 18px;
+
+    max-height: 550px;
+
+    overflow-y: auto;
+}
+
+
+/* =========================================================
+   AI TOOL NAVIGATION
+========================================================= */
+
+.tool-navigation {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    gap: 4px;
+
+    margin-top: 23px;
+    margin-bottom: 23px;
+
+    padding: 5px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TOOL SLIDER
+========================================================= */
+
+.tool-slider {
+    position: absolute;
+
+    top: 5px;
+    left: 5px;
+
+    width:
+        calc((100% - 10px - 12px) / 4);
+
+    height:
+        calc(100% - 10px);
+
+    border-radius: 8px;
+
+    background:
+        linear-gradient(135deg,
+            rgba(139, 92, 246, 0.25),
+            rgba(109, 40, 217, 0.18));
+
+    border:
+        1px solid rgba(139, 92, 246, 0.35);
+
+    box-shadow:
+        0 4px 15px rgba(109, 40, 217, 0.12);
+
+    transition:
+        transform 0.3s ease;
+
+    pointer-events: none;
+
+    z-index: 0;
+}
+
+
+/* =========================================================
+   TOOL BUTTON
+========================================================= */
+
+.tool-btn {
+    position: relative;
+
+    z-index: 1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding:
+        9px 12px;
+
+    border-radius: 8px;
+
+    color: var(--muted-light);
+
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        color 0.2s ease,
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.tool-btn:hover {
+    color: #ffffff;
+
+    background:
+        rgba(138, 92, 246, 0.671);
+}
+
+.tool-btn.active {
+    color: #ffffff;
+}
+
+
+/* =========================================================
+   HAMBURGER NAVIGATION
+========================================================= */
+
+.mobile-nav {
+    position: fixed;
+
+    top: 18px;
+    right: 20px;
+
+    z-index: 5000;
+}
+
+.hamburger-btn {
+    width: 44px;
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background:
+        rgba(18, 23, 38, 0.9);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 10px;
+
+    color: var(--text);
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.hamburger-btn:hover {
+    background:
+        rgba(139, 92, 246, 0.15);
+
+    border-color:
+        rgba(139, 92, 246, 0.5);
+}
+
+
+/* =========================================================
+   HAMBURGER MENU
+========================================================= */
+
+.hamburger-menu {
+    position: absolute;
+
+    top: 52px;
+    right: 0;
+
+    width: 210px;
+
+    padding: 8px;
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 8px;
+
+    background:
+        rgba(15, 19, 32, 0.98);
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 40px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    overflow: visible;
+}
+
+.hamburger-menu.open {
+    display: flex;
+}
+
+
+/* =========================================================
+   HAMBURGER WORKSPACE BUTTON
+========================================================= */
+
+
+.hamburger-menu>.workspace-btn {
+    position: relative;
+
+    width: 100%;
+    min-height: 40px;
+
+    margin: 0;
+    padding: 9px 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    color: #a78bfa;
+
+    font-family: "DM Sans", sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+/* Workspace hover */
+
+.hamburger-menu>.workspace-btn:hover {
+    background: rgba(139, 92, 246, 0.13);
+
+    border-color: rgba(139, 92, 246, 0.65);
+
+    color: #ffffff;
+
+    transform: translateY(-1px);
+}
+
+
+/* Workspace active/focus */
+
+.hamburger-menu>.workspace-btn:focus {
+    outline: none;
+
+    border-color: rgba(139, 92, 246, 0.65);
+
+    background: rgba(139, 92, 246, 0.10);
+}
+
+
+/* Remove default underline if Workspace is <a> */
+
+.hamburger-menu>.workspace-btn,
+.hamburger-menu>.workspace-btn:visited {
+    text-decoration: none;
+}
+
+/* =========================================================
+   USER MENU
+========================================================= */
+
+.user-menu {
+    position: relative;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+
+    align-items: stretch;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    z-index: auto;
+}
+
+
+/* =========================================================
+   PROFILE MENU
+========================================================= */
+
+.profile-menu {
+    position: relative;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    display: block;
+}
+
+
+/* =========================================================
+   PROFILE BUTTON
+========================================================= */
+
+.profile-btn {
+    width: 100%;
+    min-height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 8px;
+
+    padding:
+        7px 10px;
+
+    border:
+        1px solid rgba(139, 92, 246, 0.35);
+
+    border-radius: 10px;
+
+    background:
+        rgba(255, 255, 255, 0.025);
+
+    color: #fff;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.profile-btn:hover {
+    background:
+        rgba(139, 92, 246, 0.13);
+
+    border-color:
+        rgba(139, 92, 246, 0.65);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   PROFILE AVATAR
+========================================================= */
+
+.profile-avatar {
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(135deg,
+            #8b5cf6,
+            #6d28d9);
+
+    color: #fff;
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.profile-avatar.large {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+}
+
+#profileName {
+    flex: 1;
+
+    min-width: 0;
+
+    text-align: left;
+
+    overflow: hidden;
+
+    white-space: nowrap;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   PROFILE ARROW
+========================================================= */
+
+.profile-arrow {
+    margin-left: auto;
+
+    color: #a78bfa;
+
+    font-size: 16px;
+
+    line-height: 1;
+
+    flex-shrink: 0;
+
+    transition:
+        transform 0.2s ease,
+        color 0.2s ease;
+}
+
+.profile-btn:hover .profile-arrow {
+    color: #ffffff;
+}
+
+.profile-menu.open .profile-arrow {
+    transform:
+        rotate(180deg);
+}
+
+
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
+.profile-dropdown {
+    position: absolute;
+
+    top:
+        calc(100% + 8px);
+
+    right: 0;
+    left: auto;
+
+    width: 100%;
+
+    margin: 0;
+    padding: 8px;
+
+    display: none;
+
+    background:
+        rgba(15, 19, 32, 0.98);
+
+    border:
+        1px solid rgba(139, 92, 246, 0.25);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.45);
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    z-index: 10000;
+}
+
+.profile-menu.open .profile-dropdown {
+    display: block;
+
+    animation:
+        profileDropdownIn 0.16s ease;
+}
+
+.profile-dropdown.open {
+    display: block;
+
+    animation:
+        profileDropdownIn 0.16s ease;
+}
+
+@keyframes profileDropdownIn {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(-6px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   PROFILE INFORMATION
+========================================================= */
+
+.profile-info {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px;
+}
+
+.profile-info strong {
+    display: block;
+
+    color: #fff;
+
+    font-family:
+        "Space Grotesk",
+        sans-serif;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    max-width: 150px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+.profile-info small {
+    display: block;
+
+    margin-top: 3px;
+
+    color: #9299aa;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 10px;
+
+    max-width: 150px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   PROFILE DIVIDER
+========================================================= */
+
+.profile-divider {
+    height: 1px;
+
+    margin:
+        6px 3px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+}
+
+
+/* =========================================================
+   PROFILE LINKS + LOGOUT
+========================================================= */
+
+.profile-dropdown a,
+.profile-dropdown button {
+    width: 100%;
+    min-height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding:
+        9px 10px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #b4bac8;
+
+    font-family:
+        "DM Sans",
+        sans-serif;
+
+    font-size: 12px;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    box-sizing: border-box;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+.profile-dropdown a:hover,
+.profile-dropdown button:hover {
+    background:
+        rgba(139, 92, 246, 0.12);
+
+    color: #fff;
+}
+
+#logoutBtn {
+    color: #fb7185;
+}
+
+#logoutBtn:hover {
+    background:
+        rgba(251, 113, 133, 0.10);
+
+    color: #fda4af;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body {
+        padding:
+            32px 14px 60px;
+    }
+
+    .wrap {
+        max-width: 100%;
+    }
+
+    header {
+        margin-bottom: 24px;
+    }
+
+    h1 {
+        font-size: 34px;
+    }
+
+    .sub {
+        font-size: 14px;
+    }
+
+    .panel {
+        padding: 19px;
+        border-radius: 14px;
+    }
+
+    textarea {
+        min-height: 160px;
+        font-size: 14px;
+        padding: 14px;
+    }
+
+
+    /* -----------------------------------------
+       LOGIN
+    ----------------------------------------- */
+
+    .auth-buttons {
+        top: 12px;
+        right: 12px;
+    }
+
+    .login-btn {
+        padding:
+            7px 11px;
+
+        font-size: 11px;
+    }
+
+
+    /* -----------------------------------------
+       HAMBURGER
+    ----------------------------------------- */
+
+    .mobile-nav {
+        top: 12px;
+        right: 12px;
+    }
+
+    .hamburger-menu {
+        top: 52px;
+        right: 0;
+
+        width: 210px;
+    }
+
+
+    /* -----------------------------------------
+       PROFILE
+    ----------------------------------------- */
+
+    .profile-btn {
+        min-height: 40px;
+
+        padding:
+            4px 9px 4px 5px;
+
+        gap: 7px;
+    }
+
+    .profile-avatar {
+        width: 30px;
+        height: 30px;
+
+        border-radius: 8px;
+    }
+
+    .profile-btn #profileName {
+        max-width: 75px;
+
+        overflow: hidden;
+
+        white-space: nowrap;
+
+        text-overflow: ellipsis;
+    }
+
+    .profile-dropdown {
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------
+       AI TOOLS
+    ----------------------------------------- */
+
+    .tool-navigation {
+        display: grid;
+
+        grid-template-columns:
+            repeat(4, 1fr);
+
+        gap: 4px;
+
+        width: 100%;
+
+        margin-top: 18px;
+        margin-bottom: 18px;
+
+        padding: 4px;
+
+        background:
+            rgba(255, 255, 255, 0.025);
+
+        border:
+            1px solid var(--border);
+
+        border-radius: 12px;
+
+        overflow: hidden;
+    }
+
+    .tool-slider {
+        top: 4px;
+        left: 4px;
+
+        height:
+            calc(100% - 8px);
+
+        width:
+            calc((100% - 8px - 12px) / 4);
+    }
+
+    .tool-btn {
+        min-height: 38px;
+
+        padding:
+            8px 5px;
+
+        font-size: 12px;
+
+        white-space: nowrap;
+    }
+
+
+    /* -----------------------------------------
+       ACTION BUTTONS
+    ----------------------------------------- */
+
+    .actions {
+        flex-direction: column;
+    }
+
+    #generateBtn,
+    #clearBtn {
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------
+       OUTPUT
+    ----------------------------------------- */
+
+    .output-head {
+        align-items: flex-start;
+    }
+
+    #copyBtn {
+        padding:
+            7px 10px;
+    }
+
+    #promptText {
+        font-size: 12.5px;
+
+        padding: 15px;
+    }
+
+
+    /* -----------------------------------------
+       POPUP
+    ----------------------------------------- */
+
+    .login-popup {
+        padding:
+            28px 20px;
+    }
+
+    .login-popup h3 {
+        font-size: 21px;
+    }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .panel {
+        padding: 16px;
+    }
+
+    .output-head {
+        flex-direction: column;
+    }
+
+    #copyBtn {
+        width: 100%;
+
+        justify-content: center;
+    }
+
+    .hamburger-menu {
+        width: 200px;
+    }
+
+    .profile-btn #profileName {
+        display: none;
+    }
+
+    .profile-btn {
+        padding-right: 7px;
+    }
+
+    .profile-dropdown {
+        width: 100%;
+    }
+
+    .mobile-nav {
+        right: 10px;
+    }
+}
+
+/* =====================================================
+   GENERATE BUTTON LOADING SPINNER
+   ===================================================== */
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+    animation: spinnerRotate 0.8s linear infinite;
+}
+
+.spinner circle {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 28;
+    stroke-dashoffset: 8;
+}
+
+@keyframes spinnerRotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
