@@ -18,7 +18,12 @@ const PORT = process.env.PORT || 3000;
 // FIREBASE ADMIN
 // =====================================================
 
-const serviceAccount = require("./serviceAccountKey.json");
+const serviceAccount = JSON.parse(
+    Buffer.from(
+        process.env.FIREBASE_SERVICE_ACCOUNT,
+        "base64"
+    ).toString("utf8")
+);
 
 initializeApp({
     credential: cert(serviceAccount)
