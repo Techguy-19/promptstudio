@@ -81,6 +81,9 @@ const frontendPath = path.join(__dirname, "../frontend");
 
 app.use(express.static(frontendPath));
 
+app.get("/login", (req, res) => {
+    res.sendFile(path.join(frontendPath, "login.html"));
+});
 
 // =====================================================
 // GOOGLE AUTHENTICATION
