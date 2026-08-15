@@ -1358,6 +1358,40 @@ function checkAuthentication() {
 
 }
 
+// =====================================================
+// LOGOUT
+// =====================================================
+
+if (logoutBtn) {
+
+    logoutBtn.addEventListener("click", async function (event) {
+
+        event.preventDefault();
+        event.stopPropagation();
+
+        try {
+
+            // Remove logged-in user from browser
+            localStorage.removeItem("promptStudioUser");
+
+            // Optional: clear any Firebase/session-related data
+            sessionStorage.clear();
+
+            // Redirect to login page
+            window.location.replace("/login.html");
+
+        } catch (error) {
+
+            console.error(
+                "Logout error:",
+                error
+            );
+
+        }
+
+    });
+
+}
 
 // =====================================================
 // INITIALIZE AUTHENTICATION
