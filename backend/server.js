@@ -831,6 +831,8 @@ app.get(
     (req, res) => {
 
         if (!req.session.userId) {
+            console.log("SESSION SECRET EXISTS:", !!process.env.SESSION_SECRET);
+            console.log("SESSION USER ID:", req.session?.userId);
 
             return res.json({
 
