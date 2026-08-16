@@ -76,6 +76,10 @@ const logoutBtn = document.getElementById(
     "logoutBtn"
 );
 
+const mobileLogoutBtn =
+    document.getElementById(
+        "mobileLogoutBtn"
+    );
 
 // =====================================================
 // USER DATA
@@ -2713,26 +2717,30 @@ const logoutModalOverlay =
 // OPEN LOGOUT MODAL
 // =====================================================
 
-if (
-    logoutBtn
-) {
+function openLogoutModal() {
+
+    if (logoutModal) {
+        logoutModal.classList.add("active");
+    }
+}
+
+
+if (logoutBtn) {
 
     logoutBtn.addEventListener(
         "click",
-        () => {
-
-            if (
-                logoutModal
-            ) {
-
-                logoutModal.classList.add(
-                    "active"
-                );
-            }
-        }
+        openLogoutModal
     );
 }
 
+
+if (mobileLogoutBtn) {
+
+    mobileLogoutBtn.addEventListener(
+        "click",
+        openLogoutModal
+    );
+}
 
 // =====================================================
 // CLOSE LOGOUT MODAL
