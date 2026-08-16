@@ -57,18 +57,18 @@ app.use(
 
 app.use(express.json());
 
+app.set("trust proxy", 1);
+
 app.use(
     session({
-        secret:
-            process.env.SESSION_SECRET ||
-            "prompt-studio-secret-change-this",
-
+        secret: process.env.SESSION_SECRET,
         resave: false,
-
         saveUninitialized: false,
 
         cookie: {
             httpOnly: true,
+            secure: true,
+            sameSite: "lax",
             maxAge: 1000 * 60 * 60 * 24 * 7
         }
     })
