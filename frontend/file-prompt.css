@@ -693,6 +693,11 @@ textarea::placeholder {
     cursor: pointer;
 }
 
+#copyBtn.copied {
+    background: rgba(52, 211, 153, 0.12);
+    color: var(--success);
+    border-color: rgba(52, 211, 153, 0.3);
+}
 #promptText {
     font-family: 'IBM Plex Mono', monospace;
 
