@@ -3428,17 +3428,4 @@ app.get(
     }
 );
 
-// =====================================================
-// START SERVER
-// =====================================================
-
-app.listen(
-    PORT,
-    () => {
-
-        console.log(
-            `Prompt Studio running at http://localhost:${PORT}`
-        );
-
-    }
-);
+module.exports = app;
