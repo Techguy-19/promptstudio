@@ -33,6 +33,19 @@ const outputFormat =
     document.getElementById("outputFormat");
 
 
+const loginPopup =
+    document.getElementById("loginPopup");
+
+const loginPopupClose =
+    document.getElementById("loginPopupClose");
+
+const popupLoginBtn =
+    document.getElementById("popupLoginBtn");
+
+const popupContinueBtn =
+    document.getElementById("popupContinueBtn");
+
+
 // =====================================================
 // OUTPUT LANGUAGE ELEMENTS
 // =====================================================
@@ -555,6 +568,7 @@ renderFormats();
 // GENERATE TEXT PROMPT
 // =====================================================
 
+
 if (generateBtn) {
 
     generateBtn.addEventListener(
@@ -752,6 +766,39 @@ if (generateBtn) {
 
 }
 
+
+if (promptText) {
+
+    promptText.textContent =
+        result;
+
+}
+
+if (outputPanel) {
+
+    outputPanel.style.display =
+        "block";
+
+    outputPanel.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
+
+}
+
+
+// -----------------------------------------
+// SHOW LOGIN POPUP IF USER IS NOT LOGGED IN
+// -----------------------------------------
+
+const isLoggedIn =
+    await checkAuthentication();
+
+if (!isLoggedIn) {
+
+    showLoginSavePopup();
+
+}
 
 // =====================================================
 // CLEAR EVERYTHING
