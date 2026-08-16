@@ -791,15 +791,19 @@ if (outputPanel) {
 // SHOW LOGIN POPUP IF USER IS NOT LOGGED IN
 // -----------------------------------------
 
-const isLoggedIn =
-    await checkAuthentication();
+if (outputPanel) {
 
-if (!isLoggedIn) {
+    outputPanel.style.display =
+        "block";
 
-    showLoginSavePopup();
+    outputPanel.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest"
+    });
 
 }
 
+showLoginSavePopup();
 // =====================================================
 // CLEAR EVERYTHING
 // =====================================================
