@@ -767,43 +767,7 @@ if (generateBtn) {
 }
 
 
-if (promptText) {
 
-    promptText.textContent =
-        result;
-
-}
-
-if (outputPanel) {
-
-    outputPanel.style.display =
-        "block";
-
-    outputPanel.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
-    });
-
-}
-
-
-// -----------------------------------------
-// SHOW LOGIN POPUP IF USER IS NOT LOGGED IN
-// -----------------------------------------
-
-if (outputPanel) {
-
-    outputPanel.style.display =
-        "block";
-
-    outputPanel.scrollIntoView({
-        behavior: "smooth",
-        block: "nearest"
-    });
-
-}
-
-showLoginSavePopup();
 // =====================================================
 // CLEAR EVERYTHING
 // =====================================================
