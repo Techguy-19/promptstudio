@@ -4,7 +4,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const path = require("path");
 const bcrypt = require("bcryptjs");
-const session = require("express-session");
+const session = require("cookie-session");
 const { GoogleGenAI } = require("@google/genai");
 const { initializeApp, cert } = require("firebase-admin/app");
 const { getAuth } = require("firebase-admin/auth");
@@ -61,16 +61,14 @@ app.set("trust proxy", 1);
 
 app.use(
     session({
-        secret: process.env.SESSION_SECRET,
-        resave: false,
-        saveUninitialized: false,
-
-        cookie: {
-            httpOnly: true,
-            secure: true,
-            sameSite: "none",
-            maxAge: 1000 * 60 * 60 * 24 * 7
-        }
+        name: "promptstudio.sid",
+        keys: [
+            process.env.SESSION_SECRET
+        ],
+        httpOnly: true,
+        secure: false,
+        sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 24 * 7
     })
 );
 
@@ -275,24 +273,7 @@ app.post(
                 req.session.userEmail =
                     newUser.email;
 
-                await new Promise(
-                    (resolve, reject) => {
-
-                        req.session.save(
-                            error => {
-
-                                if (error) {
-                                    reject(error);
-                                } else {
-                                    resolve();
-                                }
-
-                            }
-                        );
-
-                    }
-                );
-
+              
                 // ---------------------------------------------
                 // SIGNUP RESPONSE
                 // ---------------------------------------------
@@ -376,23 +357,7 @@ app.post(
                 req.session.userEmail =
                     user.email;
 
-                await new Promise(
-                    (resolve, reject) => {
-
-                        req.session.save(
-                            error => {
-
-                                if (error) {
-                                    reject(error);
-                                } else {
-                                    resolve();
-                                }
-
-                            }
-                        );
-
-                    }
-                );
+                
 
                 // ---------------------------------------------
                 // LOGIN RESPONSE
@@ -652,12 +617,7 @@ app.post(
             req.session.userEmail =
                 newUser.email;
 
-            await new Promise((resolve, reject) => {
-                req.session.save(error => {
-                    if (error) reject(error);
-                    else resolve();
-                });
-            });
+           
 
             // -----------------------------
             // RESPONSE
@@ -814,12 +774,7 @@ app.post(
             req.session.userEmail =
                 user.email;
 
-            await new Promise((resolve, reject) => {
-                req.session.save(error => {
-                    if (error) reject(error);
-                    else resolve();
-                });
-            });
+            
 
             // -----------------------------
             // RESPONSE
@@ -906,6 +861,7 @@ app.get(
     }
 );
 
+
 // =====================================================
 // LOGOUT
 // =====================================================
@@ -914,44 +870,42 @@ app.post(
     "/api/logout",
     (req, res) => {
 
-        req.session.destroy(
-            (error) => {
+        try {
 
-                if (error) {
+            // cookie-session does not use req.session.destroy()
+            // Simply clear the session object.
+            req.session = null;
 
-                    console.error(
-                        "Logout Error:",
-                        error
-                    );
+            res.json({
 
-                    return res.status(500).json({
+                success: true,
 
-                        success: false,
+                message:
+                    "Logged out successfully."
 
-                        error:
-                            "Couldn't logout."
+            });
 
-                    });
-                }
+        } catch (error) {
 
-                res.clearCookie(
-                    "connect.sid"
-                );
+            console.error(
+                "Logout Error:",
+                error
+            );
 
-                res.json({
+            res.status(500).json({
 
-                    success: true,
+                success: false,
 
-                    message:
-                        "Logged out successfully."
+                error:
+                    "Couldn't logout."
 
-                });
+            });
 
-            }
-        );
+        }
 
     }
 );
+
 
 // =====================================================
 // GENERATE PROMPT
@@ -3427,5 +3381,8 @@ app.get(
 
     }
 );
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
 module.exports = app;
